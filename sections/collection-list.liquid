@@ -1,0 +1,45 @@
+<section class="section">
+  <div class="page-width">
+    <div class="section__header">
+      {%- if section.settings.title != blank -%}<h2 class="section__title">{{ section.settings.title }}</h2>{%- endif -%}
+    </div>
+    <div class="product-grid">
+      {%- for block in section.blocks -%}
+        {%- assign coll = collections[block.settings.collection] -%}
+        <a href="{{ coll.url | default: '#' }}" class="product-card" {{ block.shopify_attributes }}>
+          <div class="product-card__media">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ coll.title }}" loading="lazy">
+            {%- elsif coll.image != blank -%}
+              <img src="{{ coll.image | image_url: width: 600 }}" alt="{{ coll.title }}" loading="lazy">
+            {%- else -%}
+              {{ 'collection-1' | placeholder_svg_tag }}
+            {%- endif -%}
+          </div>
+          <h3 class="product-card__title">{{ coll.title | default: 'Collection' }}</h3>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection list",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Shop by collection" }
+  ],
+  "max_blocks": 12,
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "image_picker", "id": "image", "label": "Image (overrides collection image)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Collection list", "blocks": [ {"type":"collection"}, {"type":"collection"}, {"type":"collection"}, {"type":"collection"} ] }]
+}
+{% endschema %}

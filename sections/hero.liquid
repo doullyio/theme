@@ -1,0 +1,41 @@
+<section class="hero {% if section.settings.dark_text %}hero--dark{% endif %}" style="min-height: {{ section.settings.height }}vh">
+  {%- if section.settings.image != blank -%}
+    <div class="hero__media">
+      <img
+        src="{{ section.settings.image | image_url: width: 2400 }}"
+        srcset="{{ section.settings.image | image_url: width: 800 }} 800w, {{ section.settings.image | image_url: width: 1600 }} 1600w, {{ section.settings.image | image_url: width: 2400 }} 2400w"
+        sizes="100vw"
+        alt="{{ section.settings.image.alt | escape }}"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+        fetchpriority="high">
+    </div>
+  {%- endif -%}
+  <div class="hero__content page-width">
+    {%- if section.settings.heading != blank -%}
+      <h1 class="hero__title">{{ section.settings.heading }}</h1>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <p class="hero__subtitle">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+      <a href="{{ section.settings.button_link }}" class="btn btn--primary">{{ section.settings.button_label }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "New season, new style" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Discover our latest collection." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "range", "id": "height", "label": "Height (vh)", "min": 40, "max": 100, "step": 5, "default": 70 },
+    { "type": "checkbox", "id": "dark_text", "label": "Dark text (use on light backgrounds)", "default": false }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}
