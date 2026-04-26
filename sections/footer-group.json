@@ -7,11 +7,11 @@
       "blocks": {
         "shop": { "type": "menu", "settings": { "title": "Shop" } },
         "help": { "type": "menu", "settings": { "title": "Help" } },
-        "newsletter": { "type": "newsletter" }
+        "newsletter": { "type": "newsletter", "settings": { "title": "Join the pack", "subtext": "Subscribe for cozy drops, pup tips, and 10% off your first order." } }
       },
       "block_order": ["shop", "help", "newsletter"],
       "settings": {
-        "description": "A modern store powered by Shopify.",
+        "description": "PupCloud crafts cloud-soft beds, blankets, and accessories for the world’s coziest pups.",
         "bottom_text": "All rights reserved."
       }
     }

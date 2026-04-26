@@ -26,8 +26,8 @@
         {%- for i in (1..section.settings.product_count) -%}
           <div class="product-card">
             <div class="product-card__media">{{ 'product-1' | placeholder_svg_tag }}</div>
-            <h3 class="product-card__title">Example product</h3>
-            <div class="product-card__price">$19.99</div>
+            <h3 class="product-card__title">Cloud Bed</h3>
+            <div class="product-card__price">$79.00</div>
           </div>
         {%- endfor -%}
       </div>
@@ -39,8 +39,8 @@
 {
   "name": "Featured collection",
   "settings": [
-    { "type": "text", "id": "title", "label": "Title", "default": "Featured products" },
-    { "type": "text", "id": "subtitle", "label": "Subtitle" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Bestsellers" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Pup-approved favorites" },
     { "type": "collection", "id": "collection", "label": "Collection" },
     { "type": "range", "id": "product_count", "label": "Products to show", "min": 4, "max": 16, "step": 1, "default": 8 },
     { "type": "checkbox", "id": "show_view_all", "label": "Show \"View all\" button", "default": true }

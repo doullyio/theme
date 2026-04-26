@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Doully",
+    "theme_name": "PupCloud",
     "theme_version": "1.0.0",
-    "theme_author": "Doully",
-    "theme_documentation_url": "https://doully.io",
-    "theme_support_url": "https://doully.io/support"
+    "theme_author": "PupCloud",
+    "theme_documentation_url": "https://pupcloud.com",
+    "theme_support_url": "https://pupcloud.com/support"
   },
   {
     "name": "Logo",
@@ -23,7 +23,7 @@
         "step": 10,
         "unit": "px",
         "label": "Logo width",
-        "default": 140
+        "default": 160
       },
       {
         "type": "image_picker",
@@ -40,19 +40,19 @@
         "type": "color",
         "id": "color_background",
         "label": "Background",
-        "default": "#ffffff"
+        "default": "#fbf7f2"
       },
       {
         "type": "color",
         "id": "color_foreground",
         "label": "Text",
-        "default": "#121212"
+        "default": "#2b2620"
       },
       {
         "type": "color",
         "id": "color_accent",
         "label": "Accent",
-        "default": "#121212"
+        "default": "#c98b6b"
       },
       {
         "type": "color",
@@ -64,13 +64,13 @@
         "type": "color",
         "id": "color_border",
         "label": "Border",
-        "default": "#e5e5e5"
+        "default": "#e9ddd0"
       },
       {
         "type": "color",
         "id": "color_muted",
         "label": "Muted text",
-        "default": "#6b6b6b"
+        "default": "#7a6f63"
       }
     ]
   },
@@ -124,10 +124,10 @@
   {
     "name": "Social",
     "settings": [
-      { "type": "text", "id": "social_instagram", "label": "Instagram URL" },
+      { "type": "text", "id": "social_instagram", "label": "Instagram URL", "default": "https://instagram.com/pupcloud" },
       { "type": "text", "id": "social_twitter", "label": "Twitter/X URL" },
       { "type": "text", "id": "social_facebook", "label": "Facebook URL" },
-      { "type": "text", "id": "social_tiktok", "label": "TikTok URL" },
+      { "type": "text", "id": "social_tiktok", "label": "TikTok URL", "default": "https://tiktok.com/@pupcloud" },
       { "type": "text", "id": "social_youtube", "label": "YouTube URL" }
     ]
   }
