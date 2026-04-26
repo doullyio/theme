@@ -1,0 +1,45 @@
+{%- liquid
+  assign on_sale = false
+  if product.compare_at_price > product.price
+    assign on_sale = true
+  endif
+  assign sold_out = false
+  unless product.available
+    assign sold_out = true
+  endunless
+-%}
+<a href="{{ product.url }}" class="product-card">
+  <div class="product-card__media">
+    {%- if product.featured_image -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        srcset="{{ product.featured_image | image_url: width: 300 }} 300w, {{ product.featured_image | image_url: width: 600 }} 600w, {{ product.featured_image | image_url: width: 900 }} 900w"
+        sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+        alt="{{ product.featured_image.alt | escape | default: product.title }}"
+        loading="lazy"
+        width="{{ product.featured_image.width }}"
+        height="{{ product.featured_image.height }}">
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag }}
+    {%- endif -%}
+    {%- if sold_out -%}
+      <span class="product-card__badge">{{ 'products.product.sold_out' | t }}</span>
+    {%- elsif on_sale -%}
+      <span class="product-card__badge">{{ 'products.product.on_sale' | t }}</span>
+    {%- endif -%}
+  </div>
+  {%- if product.vendor != blank -%}
+    <div class="product-card__vendor">{{ product.vendor }}</div>
+  {%- endif -%}
+  <h3 class="product-card__title">{{ product.title }}</h3>
+  <div class="product-card__price">
+    {%- if product.price_varies -%}
+      <span>{{ 'products.product.from_price' | t: price: product.price_min | money }}</span>
+    {%- else -%}
+      <span class="{% if on_sale %}product-card__price--sale{% endif %}">{{ product.price | money }}</span>
+      {%- if on_sale -%}
+        <span class="product-card__price--compare">{{ product.compare_at_price | money }}</span>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</a>
