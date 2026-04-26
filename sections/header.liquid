@@ -1,0 +1,68 @@
+<header class="header" role="banner">
+  <div class="page-width">
+    <div class="header__inner">
+      <button class="header__icon menu-toggle" data-drawer-open="mobile-menu" aria-label="{{ 'general.accessibility.open_menu' | t }}">
+        {% render 'icon', icon: 'menu' %}
+      </button>
+
+      <a href="/" class="header__logo">
+        {%- if section.settings.logo != blank -%}
+          <img
+            src="{{ section.settings.logo | image_url: width: 600 }}"
+            alt="{{ shop.name }}"
+            width="{{ section.settings.logo.width }}"
+            height="{{ section.settings.logo.height }}"
+            style="--logo-width: {{ settings.logo_width }}px; max-width: {{ settings.logo_width }}px;">
+        {%- else -%}
+          {{ shop.name }}
+        {%- endif -%}
+      </a>
+
+      <nav class="header__nav" aria-label="primary">
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+        {%- endfor -%}
+      </nav>
+
+      <div class="header__actions">
+        <a href="{{ routes.search_url }}" class="header__icon" aria-label="{{ 'general.search.title' | t }}">
+          {% render 'icon', icon: 'search' %}
+        </a>
+        <a href="{{ routes.account_url }}" class="header__icon" aria-label="{{ 'customer.account.title' | t }}">
+          {% render 'icon', icon: 'user' %}
+        </a>
+        <a href="{{ routes.cart_url }}" class="header__icon" aria-label="{{ 'general.accessibility.open_cart' | t }}">
+          {% render 'icon', icon: 'cart' %}
+          {%- if cart.item_count > 0 -%}
+            <span class="cart-count">{{ cart.item_count }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="drawer__overlay" data-drawer-overlay="mobile-menu"></div>
+<aside class="drawer" id="mobile-menu" aria-label="{{ 'sections.header.menu' | t }}">
+  <div class="drawer__header">
+    <h2 class="drawer__title">{{ 'sections.header.menu' | t }}</h2>
+    <button class="drawer__close" data-drawer-close aria-label="{{ 'general.accessibility.close' | t }}">{% render 'icon', icon: 'close' %}</button>
+  </div>
+  <div class="drawer__body">
+    <nav class="drawer__nav" aria-label="mobile">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+  </div>
+</aside>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" }
+  ]
+}
+{% endschema %}

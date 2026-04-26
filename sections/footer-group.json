@@ -1,0 +1,20 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "shop": { "type": "menu", "settings": { "title": "Shop" } },
+        "help": { "type": "menu", "settings": { "title": "Help" } },
+        "newsletter": { "type": "newsletter" }
+      },
+      "block_order": ["shop", "help", "newsletter"],
+      "settings": {
+        "description": "A modern store powered by Shopify.",
+        "bottom_text": "All rights reserved."
+      }
+    }
+  },
+  "order": ["footer"]
+}

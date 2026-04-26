@@ -1,0 +1,82 @@
+<footer class="footer" role="contentinfo">
+  <div class="page-width">
+    <div class="footer__grid">
+      <div>
+        <h3 class="footer__title">{{ shop.name }}</h3>
+        {%- if section.settings.description != blank -%}
+          <p style="color:var(--color-muted);max-width:36ch">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+        {%- when 'menu' -%}
+          <div {{ block.shopify_attributes }}>
+            <h4 class="footer__title">{{ block.settings.title }}</h4>
+            <ul class="footer__list">
+              {%- for link in block.settings.menu.links -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- when 'newsletter' -%}
+          <div class="footer__newsletter" {{ block.shopify_attributes }}>
+            <h4 class="footer__title">{{ block.settings.title }}</h4>
+            {%- if block.settings.subtext != blank -%}<p style="color:var(--color-muted)">{{ block.settings.subtext }}</p>{%- endif -%}
+            {%- form 'customer', class: 'newsletter-form' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              {%- if form.posted_successfully? -%}
+                <p class="form-status form-status--success">{{ 'general.newsletter.success' | t }}</p>
+              {%- endif -%}
+              <div style="display:flex;gap:.5rem">
+                <input type="email" name="contact[email]" placeholder="{{ 'general.newsletter.placeholder' | t }}" required aria-label="{{ 'general.newsletter.label' | t }}">
+                <button type="submit" class="btn btn--primary">{{ 'general.newsletter.submit' | t }}</button>
+              </div>
+            {%- endform -%}
+          </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="footer__bottom">
+      <div>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.bottom_text }}</div>
+      {% render 'social-icons' %}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "textarea", "id": "description", "label": "Description", "default": "A modern store powered by Shopify." },
+    { "type": "text", "id": "bottom_text", "label": "Bottom text", "default": "All rights reserved." }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Shop" },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Newsletter" },
+        { "type": "text", "id": "subtext", "label": "Subtext", "default": "Subscribe for updates and exclusive offers." }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "menu", "settings": { "title": "Shop" } },
+      { "type": "menu", "settings": { "title": "Help" } },
+      { "type": "newsletter" }
+    ]
+  }
+}
+{% endschema %}
